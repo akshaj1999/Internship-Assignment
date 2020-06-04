@@ -7,21 +7,28 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 
+//  Complexity of the code is minimum date to maximum date that is o(end date - start date) or o(n)
 
-// public
+
 class Solution{
 
     public static Map<LocalDate, Long> solution(Map<LocalDate, Long> hm)
     {
+        //Iterating the input map
         Iterator hmIterator = hm.entrySet().iterator(); 
-        Map.Entry mapElement1=null,mapElement2=null;
-            Map.Entry previous = null;
-            boolean flag = true;
+        
+        //intialize some variable
+        Map.Entry mapElement1=null,mapElement2=null,previous = null;
+        boolean flag = true;
+        
+        // making a new dictionary or map for returning of answer
         Map<LocalDate, Long> back = new TreeMap<LocalDate, Long>();
         for(Map.Entry e: hm.entrySet())
         {
             back.put((LocalDate)e.getKey(),(Long)e.getValue());
         }
+        
+        //Logic for entering all the dates 
         while (hmIterator.hasNext()) { 
             if(flag)
             {
@@ -53,29 +60,28 @@ class Solution{
                       start +=gap;
                       back.put(date,start);
                 }
-                // System.out.println(end);
-                // System.out.println(start);
             back.put(d2,((start+end)/2));
            previous = (Map.Entry)mapElement2;
            flag = false;        
         }
-         return back;
-
-         // '2019-01-01':100,'2019-01-05':140,'2019-01-30':1090,'2018-10-20':830,'2016-05-22':109823
+         return back;    // returning answer
 
     }
   
       public static void main(String[] args) throws Exception {
         FastScanner cin = new FastScanner(System.in);
-
+        //taking input in one line
         String str = cin.nextLine();
         
+        //splitting dates with their values
         String strs[] = str.trim().split(",");
         
+        // making the dictionary or map
         Map<LocalDate, Long> m = new TreeMap<LocalDate, Long>();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+        
+          //entering dates into the map
         for(int i=0;i<strs.length;i++)
         {
             String temp[] = strs[i].split(":");
@@ -84,8 +90,10 @@ class Solution{
             long value = Long.parseLong(temp[1]);
             m.put(date,value);
         }
+        //calling the function solution and getting back answer
         Map<LocalDate, Long> ans = solution(m);
-
+        
+        //printing all the dates 
         for(Map.Entry e: ans.entrySet())
         {
             System.out.println("Date: "+e.getKey()+" Value: "+e.getValue());
