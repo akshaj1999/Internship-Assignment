@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 
-//  Complexity of the code is minimum date to maximum date that is o(end date - start date) or o(n)
+//  Complexity of the code is minimum date to maximum date that is O(end date - start date) or O(n)
 
 
 class Solution{
